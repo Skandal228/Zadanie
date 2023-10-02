@@ -34,15 +34,15 @@ public class Calculator {
         }
     }
 
-    private static boolean isRoman(String number) {
+    public static boolean isRoman(String number) {
         return number.matches("[IVX]+");
     }
 
-    private static boolean isArabic(String number) {
+    public static boolean isArabic(String number) {
         return number.matches("[0-9]+");
     }
 
-    private static int toArabic(String romanNumber) {
+    public static int toArabic(String romanNumber) {
         int result = 0;
         int prevValue = 0;
 
@@ -61,7 +61,7 @@ public class Calculator {
         return result;
     }
 
-    private static int getRomanValue(char symbol) {
+    public static int getRomanValue(char symbol) {
         switch (symbol) {
             case 'I':
                 return 1;
@@ -74,7 +74,7 @@ public class Calculator {
         }
     }
 
-    private static String toRoman(int number) {
+    public static String toRoman(int number) {
         StringBuilder romanNumber = new StringBuilder();
 
         String[] romanSymbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -90,7 +90,7 @@ public class Calculator {
         return romanNumber.toString();
     }
 
-    private static int calculateRoman(int a, String operator, int b) throws Exception {
+    public static int calculateRoman(int a, String operator, int b) throws Exception {
         int result;
 
         switch (operator) {
@@ -116,7 +116,7 @@ public class Calculator {
         return result;
     }
 
-    private static int calculateArabic(int a, String operator, int b) throws Exception {
+    public static int calculateArabic(int a, String operator, int b) throws Exception {
         int result;
 
         switch (operator) {
