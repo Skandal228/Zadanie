@@ -3,41 +3,49 @@ package Kata;
 
 import java.util.Scanner;
 
-public class Calculator {
+public class Main {
     public static void main(String[] args) {
+        System.out.println("Введите выражение: ");
         Scanner scanner = new Scanner(System.in);
+        System.out.println(calc(scanner.nextLine()));
 
+    }
+
+    public static String calc(String input) {
         try {
-            System.out.print("Введите выражение: ");
-            String expression = scanner.nextLine();
-            String[] parts = expression.split(" ");
+
+            String[] parts = input.split(" ");
 
             if (parts.length != 3) {
                 throw new Exception("Строка не является математической операцией!");
             }
 
-            String a = parts[0];
+            String firstNumb = parts[0];
             String operator = parts[1];
-            String b = parts[2];
+            String secondNumb = parts[2];
 
-            if (isRoman(a) && isRoman(b)) {
-                int result = calculateRoman(toArabic(a), operator, toArabic(b));
-                System.out.println("Результат: " + toRoman(result));
-            } else if (isArabic(a) && isArabic(b)) {
-                int result = calculateArabic(Integer.parseInt(a), operator, Integer.parseInt(b));
-                System.out.println("Результат: " + result);
+            if (isRoman(firstNumb) && isRoman(secondNumb)) {
+                return "Результат: " + toRoman(calculateRoman(toArabic(firstNumb), operator, toArabic(secondNumb)));
+            } else if (isArabic(firstNumb) && isArabic(secondNumb)) {
+                int firstNumbArabic = Integer.parseInt(firstNumb);
+                int secondNumbArabic = Integer.parseInt(secondNumb);
+                if ((firstNumbArabic < 1 || firstNumbArabic > 10) || (secondNumbArabic < 1 || secondNumbArabic > 10)) {
+                    throw new RuntimeException("Введенные числа либо больше 10 либо меньше 1");
+                }
+                return "Результат: " + calculateArabic(Integer.parseInt(firstNumb), operator, Integer.parseInt(secondNumb));
+
             } else {
                 throw new Exception("Ошибка! Используются разные системы счисления!");
             }
         } catch (Exception e) {
             System.out.println("Ошибка! " + e.getMessage());
         }
+        return "";
     }
 
     public static boolean isRoman(String number) {
         return number.matches("[IVX]+");
     }
-
     public static boolean isArabic(String number) {
         return number.matches("[0-9]+");
     }
